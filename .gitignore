@@ -7,6 +7,7 @@ build/cpu1/exe/.cdskeyfile
 build/cpu1/exe/.reservedkeyfile
 build/cpu1/exe/.resetkeyfile
 build/cpu1/exe/cf/
+build/cpu1/exe/cFE_fs.tar
 build/cpu1/inc/
 build/cpu1/sample_app/
 build/cpu1/sample_lib/
