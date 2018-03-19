@@ -86,6 +86,14 @@
     #endif
 
 #elif _COMPOSITE_OS_
+    #include <unistd.h>
+    #include <sys/types.h>
+    #include <sys/socket.h>
+    #include <arpa/inet.h>
+    #include <netinet/in.h>
+    #include <netinet/tcp.h>
+    #include <fcntl.h>
+    #define _HAVE_FCNTL_
     #ifndef MSG_DONTWAIT
       #define MSG_DONTWAIT 0
     #endif
