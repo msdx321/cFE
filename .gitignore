@@ -1,3 +1,6 @@
+*.o
+*.so
+
 build/cpu1/ci_lab/
 build/cpu1/elf2cfetbl/
 build/cpu1/exe/.cdskeyfile
