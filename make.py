@@ -5,6 +5,7 @@ import os
 import shutil
 import subprocess as sp
 import sys
+import glob
 
 # Load command line arguments.
 parser = argparse.ArgumentParser(description='Operate the cFE build system for composite')
@@ -88,10 +89,14 @@ CFE_HEADERS_TO_COPY = [
 ]
 
 CFE_APPS = [
-    ("sch_lab", "sch_lab_app.o"),
-    ("sample_lib", "sample_lib.o"),
-    ("sample_app", "sample_app.o")
+    "hs",
+#    "mm",
+    "ds",
+    "fm",
+    "sc",
+    "sch_lab"
 ]
+
 
 # Just some shell magic to load the environment variable exports needed to build cFE.
 cfe_env = sp.Popen(["bash", "-c",
@@ -160,11 +165,13 @@ shutil.copy(OBJECT_SOURCE, OBJECT_DESTINATION)
 print "Copied {} to {}".format(OBJECT_SOURCE, OBJECT_DESTINATION)
 
 print "=== Copying apps ==="
-for (app, obj) in CFE_APPS:
-    src = CFE_MAKE_ROOT + app + "/" + obj
-    dest = COMPOSITE_IMPL_NO_INTERFACE_DIR + app + "/cFE_" + obj
-    print "Copying app '{}' to '{}'.".format(src, dest)
-    shutil.copy(src, dest)
+for app in CFE_APPS:
+    dest = COMPOSITE_IMPL_NO_INTERFACE_DIR + app + "/cFE_"
+    for src in glob.glob(CFE_MAKE_ROOT + app + "/*.o"):
+        basename = os.path.basename(src)
+        print "Copying object '{}' to '{}'.".format(basename, dest + basename)
+        shutil.copy('build/cpu1/cfs_lib/cfs_utils.o', dest + 'cfs_utils.o')
+        shutil.copy(src, dest + basename)
 
 print "=== Integrating Tar Filesystem  ==="
 sp.check_call("tar cf cFE_fs.tar --exclude=\"cf/apps/composite_cFE.o\" cf/" + OUT,

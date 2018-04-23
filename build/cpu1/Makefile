@@ -39,10 +39,16 @@
 #===============================================================================
 
 # List of apps/libs to include in the build
+
+# sample apps
 THE_APPS := sample_lib sample_app
-THE_APPS += sch_lab ci_lab to_lab
-# THE_APPS += cfs_lib
-# THE_APPS += cf cs ds fm hk hs lc md mm sc sch
+# scheduling lib
+THE_APPS += sch_lab
+# Real apps
+THE_APPS += hs mm ds fm sc
+# cFE library required by real apps
+THE_APPS += cfs_lib
+
 export THE_APPS
 
 # List of apps that include tables for the build
