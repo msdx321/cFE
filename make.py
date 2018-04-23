@@ -90,7 +90,7 @@ CFE_HEADERS_TO_COPY = [
 
 CFE_APPS = [
     "hs",
-#    "mm",
+    "mm",
     "ds",
     "fm",
     "sc",
