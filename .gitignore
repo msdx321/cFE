@@ -1,5 +1,6 @@
 *.o
 *.so
+*.tbl
 
 build/cpu1/ci_lab/
 build/cpu1/elf2cfetbl/

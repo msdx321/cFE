@@ -1,14 +1,14 @@
 /*
 ** $Id: cfe_tbl_internal.c 1.15 2014/08/22 16:30:24GMT-05:00 lwalling Exp  $
 **
-**      Copyright (c) 2004-2012, United States government as represented by the 
-**      administrator of the National Aeronautics Space Administration.  
-**      All rights reserved. This software(cFE) was created at NASA's Goddard 
+**      Copyright (c) 2004-2012, United States government as represented by the
+**      administrator of the National Aeronautics Space Administration.
+**      All rights reserved. This software(cFE) was created at NASA's Goddard
 **      Space Flight Center pursuant to government contracts.
 **
-**      This is governed by the NASA Open Source Agreement and may be used, 
+**      This is governed by the NASA Open Source Agreement and may be used,
 **      distributed and modified only pursuant to the terms of that agreement.
-**  
+**
 **
 ** Purpose:  cFE Table Services (TBL) utility function source file
 **
@@ -17,48 +17,48 @@
 ** Notes:
 **
 ** $Log: cfe_tbl_internal.c  $
-** Revision 1.15 2014/08/22 16:30:24GMT-05:00 lwalling 
+** Revision 1.15 2014/08/22 16:30:24GMT-05:00 lwalling
 ** Change signed loop counters to unsigned
-** Revision 1.14 2012/02/22 15:13:51EST lwalling 
+** Revision 1.14 2012/02/22 15:13:51EST lwalling
 ** Remove obsolete TODO comments
-** Revision 1.13 2012/01/13 12:17:39EST acudmore 
+** Revision 1.13 2012/01/13 12:17:39EST acudmore
 ** Changed license text to reflect open source
-** Revision 1.12 2012/01/04 17:27:07EST sstrege 
+** Revision 1.12 2012/01/04 17:27:07EST sstrege
 ** Added LockFlag check when checking for inactive buffer use
-** Revision 1.11 2011/12/28 14:02:55EST lwalling 
+** Revision 1.11 2011/12/28 14:02:55EST lwalling
 ** Add validation tests for spacecraft ID and processor ID to CFE_TBL_ReadHeaders()
-** Revision 1.10 2011/09/02 14:58:26EDT jmdagost 
+** Revision 1.10 2011/09/02 14:58:26EDT jmdagost
 ** Added new-line characters where missing in syslog calls.
-** Revision 1.9 2010/10/27 17:53:29EDT dkobe 
+** Revision 1.9 2010/10/27 17:53:29EDT dkobe
 ** Added TableLoadedOnce flag to Critical Table Registry
-** Revision 1.8 2010/10/27 16:36:20EDT dkobe 
+** Revision 1.8 2010/10/27 16:36:20EDT dkobe
 ** Added Table CRC computation and maintenance to internal table functions
-** Revision 1.7 2010/10/27 13:56:32EDT dkobe 
+** Revision 1.7 2010/10/27 13:56:32EDT dkobe
 ** Added TBL notification registry data and message sending function
-** Revision 1.6 2010/10/25 15:00:32EDT jmdagost 
+** Revision 1.6 2010/10/25 15:00:32EDT jmdagost
 ** Corrected bad apostrophe in prologue.
-** Revision 1.5 2010/10/04 15:18:52EDT jmdagost 
+** Revision 1.5 2010/10/04 15:18:52EDT jmdagost
 ** Cleaned up copyright symbol.
-** Revision 1.4 2009/06/10 09:20:06EDT acudmore 
+** Revision 1.4 2009/06/10 09:20:06EDT acudmore
 ** Changed OS_Mem* and OS_BSP* calls to CFE_PSP_* calls
-** Revision 1.3 2008/07/29 15:55:15EDT dkobe 
+** Revision 1.3 2008/07/29 15:55:15EDT dkobe
 ** Moved CFE_TBL_DumpToBuffer from cfe_tbl_internal.c to cfe_tbl_api.c
-** Revision 1.2 2008/07/29 14:05:35EDT dkobe 
+** Revision 1.2 2008/07/29 14:05:35EDT dkobe
 ** Removed redundant FileCreateTimeSecs and FileCreateTimeSubSecs fields
-** Revision 1.1 2008/04/17 08:05:34EDT ruperera 
+** Revision 1.1 2008/04/17 08:05:34EDT ruperera
 ** Initial revision
 ** Member added to project c:/MKSDATA/MKS-REPOSITORY/MKS-CFE-PROJECT/fsw/cfe-core/src/tbl/project.pj
-** Revision 1.51 2007/08/07 12:52:42EDT David Kobe (dlkobe) 
+** Revision 1.51 2007/08/07 12:52:42EDT David Kobe (dlkobe)
 ** Modified CFE_ES_GetPoolBuf API's first parameter to be of type uint32**
-** Revision 1.50 2007/07/13 11:27:15EDT dlkobe 
+** Revision 1.50 2007/07/13 11:27:15EDT dlkobe
 ** Moved prototype for CFE_TBL_UpdateCriticalTblCDS to cfe_tbl_internal.h
-** Revision 1.49 2007/07/03 10:19:17EDT dlkobe 
+** Revision 1.49 2007/07/03 10:19:17EDT dlkobe
 ** Removed unused CFE_TBL_AddAccessLink function
-** Revision 1.48 2007/06/07 09:34:52EDT dlkobe 
+** Revision 1.48 2007/06/07 09:34:52EDT dlkobe
 ** Corrected Critical Table CDS Name and CDS Registry Init
-** Revision 1.47 2007/04/30 11:01:16EDT rjmcgraw 
+** Revision 1.47 2007/04/30 11:01:16EDT rjmcgraw
 ** Changed EarlyInit to return error when detected
-** Revision 1.46 2007/04/28 16:14:44EDT dlkobe 
+** Revision 1.46 2007/04/28 16:14:44EDT dlkobe
 ** Changed RegisterCDS call to use internal RegisterCDSEx call
 **
 **
@@ -142,7 +142,7 @@ int32 CFE_TBL_EarlyInit (void)
         CFE_TBL_TaskData.DumpControlBlocks[i].DumpBufferPtr = NULL;
         CFE_TBL_TaskData.DumpControlBlocks[i].Size = 0;
         CFE_TBL_TaskData.DumpControlBlocks[i].TableName[0] = '\0';
-        
+
         /* Prevent Shared Buffers from being used until successfully allocated */
         CFE_TBL_TaskData.LoadBuffs[i].Taken = TRUE;
     }
@@ -151,7 +151,7 @@ int32 CFE_TBL_EarlyInit (void)
 
     CFE_TBL_TaskData.HkTlmTblRegIndex = CFE_TBL_NOT_FOUND;
     CFE_TBL_TaskData.LastTblUpdated = CFE_TBL_NOT_FOUND;
-    
+
     /*
     ** Create table registry access mutex
     */
@@ -162,7 +162,7 @@ int32 CFE_TBL_EarlyInit (void)
     {
       CFE_ES_WriteToSysLog("CFE_TBL:Registry mutex creation failed! RC=0x%08x\n",(unsigned int)Status);
       return Status;
-    }/* end if */                              
+    }/* end if */
 
     /*
     ** Create working buffer access mutex
@@ -175,7 +175,7 @@ int32 CFE_TBL_EarlyInit (void)
       CFE_ES_WriteToSysLog("CFE_TBL:Working buffer mutex creation failed! RC=0x%08x\n",(unsigned int)Status);
       return Status;
     }/* end if */
-    
+
     /*
     ** Initialize housekeeping packet (clear user data area)...
     */
@@ -192,8 +192,8 @@ int32 CFE_TBL_EarlyInit (void)
 
     /* Initialize memory partition and allocate shared table buffers. */
     Status = CFE_ES_PoolCreate(&CFE_TBL_TaskData.Buf.PoolHdl,
-                                CFE_TBL_TaskData.Buf.Partition,                               
-                                CFE_TBL_BUF_MEMORY_BYTES);        
+                                CFE_TBL_TaskData.Buf.Partition,
+                                CFE_TBL_BUF_MEMORY_BYTES);
 
     if(Status < 0)
     {
@@ -220,22 +220,22 @@ int32 CFE_TBL_EarlyInit (void)
             {
                 /* The buffer is successfully created, so allow it to be used */
                 CFE_TBL_TaskData.LoadBuffs[j].Taken = FALSE;
-                
+
                 CFE_PSP_MemSet(CFE_TBL_TaskData.LoadBuffs[j].DataSource, 0, OS_MAX_PATH_LEN);
                 CFE_TBL_TaskData.LoadBuffs[j].FileCreateTimeSecs = 0;
                 CFE_TBL_TaskData.LoadBuffs[j].FileCreateTimeSubSecs = 0;
             }
 
             j++;
-        } while ((j < CFE_TBL_MAX_SIMULTANEOUS_LOADS) && 
+        } while ((j < CFE_TBL_MAX_SIMULTANEOUS_LOADS) &&
                  (Status >= CFE_TBL_MAX_SNGL_TABLE_SIZE));
     }
-    
+
     /* Try to obtain a previous image of the Critical Table Registry from the Critical Data Store */
-    Status = CFE_ES_RegisterCDSEx(&CFE_TBL_TaskData.CritRegHandle, 
+    Status = CFE_ES_RegisterCDSEx(&CFE_TBL_TaskData.CritRegHandle,
                                   (sizeof(CFE_TBL_CritRegRec_t)*CFE_TBL_MAX_CRITICAL_TABLES),
                                   "CFE_TBL.CritReg", TRUE);
-                                
+
     /* Assume for the moment that nothing is already in the CDS and zero out the Critical Table Registry */
     for (i=0; i<CFE_TBL_MAX_CRITICAL_TABLES; i++)
     {
@@ -248,18 +248,18 @@ int32 CFE_TBL_EarlyInit (void)
         CFE_TBL_TaskData.CritReg[i].TableLoadedOnce = FALSE;
 
     }
-    
+
     if (Status == CFE_ES_CDS_ALREADY_EXISTS)
     {
         /* Try to recover the Critical Table Registry from the CDS */
         Status = CFE_ES_RestoreFromCDS(CFE_TBL_TaskData.CritReg, CFE_TBL_TaskData.CritRegHandle);
-        
+
         if (Status != CFE_SUCCESS)
         {
             /* Note if we were unable to recover error free Critical Table Registry from the CDS */
             CFE_ES_WriteToSysLog("CFE_TBL:EarlyInit-Failed to recover Critical Table Registry (Err=0x%08X)\n", (unsigned int)Status);
         }
-        
+
         /* Whether we recovered the Critical Table Registry or not, we are successful with initialization */
         Status = CFE_SUCCESS;
     }
@@ -268,7 +268,7 @@ int32 CFE_TBL_EarlyInit (void)
         /* Not being able to support Critical Tables is not the end of the world */
         /* Note the problem and move on */
         CFE_ES_WriteToSysLog("CFE_TBL:EarlyInit-Failed to create Critical Table Registry (Err=0x%08X)\n", (unsigned int)Status);
-        
+
         /* Failure to support critical tables is not a good enough reason to exit the cFE on start up */
         Status = CFE_SUCCESS;
     }
@@ -276,20 +276,20 @@ int32 CFE_TBL_EarlyInit (void)
     {
         /* Save the initial version of the Critical Table Registry in the CDS */
         Status = CFE_ES_CopyToCDS(CFE_TBL_TaskData.CritRegHandle, CFE_TBL_TaskData.CritReg);
-        
+
         if (Status != CFE_SUCCESS)
         {
             /* Not being able to support Critical Tables is not the end of the world */
             /* Note the problem and move on */
             CFE_ES_WriteToSysLog("CFE_TBL:EarlyInit-Failed to save Critical Table Registry (Err=0x%08X)\n", (unsigned int)Status);
-        
+
             /* Failure to support critical tables is not a good enough reason to exit the cFE on start up */
             Status = CFE_SUCCESS;
         }
     }
-    
+
     return Status;
-            
+
 }/* end CFE_TBL_EarlyInit */
 
 
@@ -1025,12 +1025,13 @@ int32 CFE_TBL_LoadFromFile(CFE_TBL_LoadBuff_t *WorkingBufferPtr,
 
                         if (NumBytes != TblFileHeader.NumBytes)
                         {
+                            OS_printf("Num bytes = %d, real bytes = %d\n", NumBytes, TblFileHeader.NumBytes);
                             Status = CFE_TBL_ERR_LOAD_INCOMPLETE;
                         }
-                        
+
                         /* Check to see if the file is too large (ie - more data than header claims) */
                         NumBytes = OS_read(FileDescriptor, &ExtraByte, 1);
-                        
+
                         /* If successfully read another byte, then file must have too much data */
                         if (NumBytes == 1)
                         {
@@ -1043,7 +1044,7 @@ int32 CFE_TBL_LoadFromFile(CFE_TBL_LoadBuff_t *WorkingBufferPtr,
                         /* Save file creation time for later storage into Registry */
                         WorkingBufferPtr->FileCreateTimeSecs = StdFileHeader.TimeSeconds;
                         WorkingBufferPtr->FileCreateTimeSubSecs = StdFileHeader.TimeSubSeconds;
-                        
+
                         /* Compute the CRC on the specified table buffer */
                         WorkingBufferPtr->Crc = CFE_ES_CalculateCRC(WorkingBufferPtr->BufferPtr,
                                                                     RegRecPtr->Size,
@@ -1053,6 +1054,7 @@ int32 CFE_TBL_LoadFromFile(CFE_TBL_LoadBuff_t *WorkingBufferPtr,
                 }
                 else
                 {
+                    OS_printf("Table name %s, real name %s\n", TblFileHeader.TableName, RegRecPtr->Name);
                     Status = CFE_TBL_ERR_FILE_FOR_WRONG_TABLE;
                 }
             }
@@ -1084,7 +1086,7 @@ int32 CFE_TBL_UpdateInternal( CFE_TBL_Handle_t TblHandle,
     int32 Status = CFE_SUCCESS;
     CFE_TBL_Handle_t AccessIterator;
     boolean LockStatus = FALSE;
-    
+
     if ((!RegRecPtr->LoadPending) || (RegRecPtr->LoadInProgress == CFE_TBL_NO_LOAD_IN_PROGRESS))
     {
         /* Question: Should calling CFE_TBL_Update on a table with no load pending */
@@ -1106,7 +1108,7 @@ int32 CFE_TBL_UpdateInternal( CFE_TBL_Handle_t TblHandle,
                     OS_MAX_PATH_LEN);
 
             CFE_TBL_NotifyTblUsersOfUpdate(RegRecPtr);
-            
+
             /* If the table is a critical table, update the appropriate CDS with the new data */
             if (RegRecPtr->CriticalTable == TRUE)
             {
@@ -1144,13 +1146,13 @@ int32 CFE_TBL_UpdateInternal( CFE_TBL_Handle_t TblHandle,
                 strncpy(RegRecPtr->LastFileLoaded,
                         CFE_TBL_TaskData.LoadBuffs[RegRecPtr->LoadInProgress].DataSource,
                         OS_MAX_PATH_LEN);
-                
+
                 /* Save the file creation time from the loaded file into the Table Registry */
-                RegRecPtr->Buffers[0].FileCreateTimeSecs = 
+                RegRecPtr->Buffers[0].FileCreateTimeSecs =
                     CFE_TBL_TaskData.LoadBuffs[RegRecPtr->LoadInProgress].FileCreateTimeSecs;
-                RegRecPtr->Buffers[0].FileCreateTimeSubSecs = 
+                RegRecPtr->Buffers[0].FileCreateTimeSubSecs =
                     CFE_TBL_TaskData.LoadBuffs[RegRecPtr->LoadInProgress].FileCreateTimeSubSecs;
-                
+
                 /* Save the previously computed CRC into the new buffer */
                 RegRecPtr->Buffers[0].Crc = CFE_TBL_TaskData.LoadBuffs[RegRecPtr->LoadInProgress].Crc;
 
@@ -1158,7 +1160,7 @@ int32 CFE_TBL_UpdateInternal( CFE_TBL_Handle_t TblHandle,
                 CFE_TBL_TaskData.LoadBuffs[RegRecPtr->LoadInProgress].Taken = FALSE;
 
                 CFE_TBL_NotifyTblUsersOfUpdate(RegRecPtr);
-            
+
                 /* If the table is a critical table, update the appropriate CDS with the new data */
                 if (RegRecPtr->CriticalTable == TRUE)
                 {
@@ -1182,7 +1184,7 @@ int32 CFE_TBL_UpdateInternal( CFE_TBL_Handle_t TblHandle,
 void CFE_TBL_NotifyTblUsersOfUpdate(CFE_TBL_RegistryRec_t *RegRecPtr)
 {
     CFE_TBL_Handle_t AccessIterator;
-    
+
     /* Reset Load in Progress Values */
     RegRecPtr->LoadInProgress = CFE_TBL_NO_LOAD_IN_PROGRESS;
     RegRecPtr->TimeOfLastUpdate = CFE_TIME_GetTime();
@@ -1218,13 +1220,13 @@ int32 CFE_TBL_ReadHeaders( int32 FileDescriptor,
     static uint32 ListSC[2] = { CFE_TBL_VALID_SCID_1, CFE_TBL_VALID_SCID_2};
     uint32 IndexSC;
     #endif
-    
+
     #if (CFE_TBL_VALID_PRID_COUNT > 0)
     static uint32 ListPR[4] = { CFE_TBL_VALID_PRID_1, CFE_TBL_VALID_PRID_2,
                                 CFE_TBL_VALID_PRID_3, CFE_TBL_VALID_PRID_4};
     uint32 IndexPR;
     #endif
-    
+
     /* Once the file is open, read the headers to determine the target Table */
     Status = CFE_FS_ReadHeader(StdFileHeaderPtr, FileDescriptor);
 
@@ -1384,11 +1386,11 @@ void CFE_TBL_ByteSwapUint32(uint32 *Uint32ToSwapPtr)
     int32 Temp = *Uint32ToSwapPtr;
     char *InPtr = (char *)&Temp;
     char *OutPtr = (char *)Uint32ToSwapPtr;
-    
+
     OutPtr[0] = InPtr[3];
     OutPtr[1] = InPtr[2];
     OutPtr[2] = InPtr[1];
-    OutPtr[3] = InPtr[0];    
+    OutPtr[3] = InPtr[0];
 } /* End of CFE_TBL_ByteSwapUint32() */
 
 /*******************************************************************
@@ -1409,14 +1411,14 @@ int32 CFE_TBL_CleanUpApp(uint32 AppId)
     for (i=0; i<CFE_TBL_MAX_SIMULTANEOUS_LOADS; i++)
     {
         /* Check to see if the table to be dumped is owned by the App to be deleted */
-        if ((CFE_TBL_TaskData.DumpControlBlocks[i].State != CFE_TBL_DUMP_FREE) && 
+        if ((CFE_TBL_TaskData.DumpControlBlocks[i].State != CFE_TBL_DUMP_FREE) &&
            (CFE_TBL_TaskData.DumpControlBlocks[i].RegRecPtr->OwnerAppId == AppId))
         {
             /* If so, then remove the dump request */
             CFE_TBL_TaskData.DumpControlBlocks[i].State = CFE_TBL_DUMP_FREE;
         }
     }
-    
+
     /* Scan Access Descriptors to determine if the Application had access to any tables */
     for (i=0; i<CFE_TBL_MAX_NUM_HANDLES; i++)
     {
@@ -1443,7 +1445,7 @@ int32 CFE_TBL_CleanUpApp(uint32 AppId)
                 /* Remove Table Name */
                 RegRecPtr->Name[0] = '\0';
             }
-            
+
             /* Remove the Access Descriptor Link from linked list */
             /* NOTE: If this removes the last access link, then   */
             /*       memory buffers are set free as well.         */
@@ -1464,10 +1466,10 @@ int32 CFE_TBL_CleanUpApp(uint32 AppId)
 void CFE_TBL_FindCriticalTblInfo(CFE_TBL_CritRegRec_t **CritRegRecPtr, CFE_ES_CDSHandle_t CDSHandleToFind)
 {
     uint32 i;
-    
+
     /* Assume the record is never found */
     *CritRegRecPtr = NULL;
-    
+
     for (i=0; i<CFE_TBL_MAX_CRITICAL_TABLES; i++)
     {
         if (CFE_TBL_TaskData.CritReg[i].CDSHandle == CDSHandleToFind)
@@ -1489,20 +1491,20 @@ void CFE_TBL_FindCriticalTblInfo(CFE_TBL_CritRegRec_t **CritRegRecPtr, CFE_ES_CD
 void CFE_TBL_UpdateCriticalTblCDS(CFE_TBL_RegistryRec_t *RegRecPtr)
 {
     CFE_TBL_CritRegRec_t *CritRegRecPtr = NULL;
-    
+
     int32 Status = CFE_SUCCESS;
-    
+
     /* Copy an image of the updated table to the CDS for safekeeping */
     Status = CFE_ES_CopyToCDS(RegRecPtr->CDSHandle, RegRecPtr->Buffers[RegRecPtr->ActiveBufferIndex].BufferPtr);
-    
+
     if (Status != CFE_SUCCESS)
     {
-        CFE_ES_WriteToSysLog("CFE_TBL:UpdateCritTbl-Unable to update Critical Table '%s' in CDS (Err=0x%08X)\n", 
+        CFE_ES_WriteToSysLog("CFE_TBL:UpdateCritTbl-Unable to update Critical Table '%s' in CDS (Err=0x%08X)\n",
                              RegRecPtr->Name, (unsigned int)Status);
     }
     else
     {
-        /* Locate entry in Critical Table Registry */   
+        /* Locate entry in Critical Table Registry */
         CFE_TBL_FindCriticalTblInfo(&CritRegRecPtr, RegRecPtr->CDSHandle);
         if (CritRegRecPtr != NULL)
         {
@@ -1512,10 +1514,10 @@ void CFE_TBL_UpdateCriticalTblCDS(CFE_TBL_RegistryRec_t *RegRecPtr)
             strncpy(CritRegRecPtr->LastFileLoaded, RegRecPtr->LastFileLoaded, OS_MAX_PATH_LEN);
             CritRegRecPtr->TimeOfLastUpdate = RegRecPtr->TimeOfLastUpdate;
             CritRegRecPtr->TableLoadedOnce = RegRecPtr->TableLoadedOnce;
-            
+
             /* Update copy of Critical Table Registry in the CDS */
             Status = CFE_ES_CopyToCDS(CFE_TBL_TaskData.CritRegHandle, CFE_TBL_TaskData.CritReg);
-            
+
             if (Status != CFE_SUCCESS)
             {
                 CFE_ES_WriteToSysLog("CFE_TBL:UpdateCritTbl-Unable to update Critical Table Registry in CDS (Err=0x%08X)\n",
@@ -1524,11 +1526,11 @@ void CFE_TBL_UpdateCriticalTblCDS(CFE_TBL_RegistryRec_t *RegRecPtr)
         }
         else
         {
-            CFE_ES_WriteToSysLog("CFE_TBL:UpdateCritTbl-Error finding '%s' in Critical Table Registry\n", 
+            CFE_ES_WriteToSysLog("CFE_TBL:UpdateCritTbl-Error finding '%s' in Critical Table Registry\n",
                                  RegRecPtr->Name);
         }
     }
-    
+
     /* Don't bother notifying the caller of the problem since the active table is still legitimate */
 }
 
@@ -1543,7 +1545,7 @@ void CFE_TBL_UpdateCriticalTblCDS(CFE_TBL_RegistryRec_t *RegRecPtr)
 int32 CFE_TBL_SendNotificationMsg(CFE_TBL_RegistryRec_t *RegRecPtr)
 {
     int32 Status = CFE_SUCCESS;
-    
+
     /* First, determine if a message should be sent */
     if (RegRecPtr->NotifyByMsg)
     {
@@ -1553,16 +1555,16 @@ int32 CFE_TBL_SendNotificationMsg(CFE_TBL_RegistryRec_t *RegRecPtr)
         CFE_SB_InitMsg(&CFE_TBL_TaskData.NotifyMsg,
                         RegRecPtr->NotificationMsgId,
                         sizeof(CFE_TBL_NotifyCmd_t), TRUE);
-        
+
         /* Set the command code */
         CFE_SB_SetCmdCode((CFE_SB_MsgPtr_t) &CFE_TBL_TaskData.NotifyMsg, RegRecPtr->NotificationCC);
-        
+
         /* Set the command parameter */
         CFE_TBL_TaskData.NotifyMsg.Payload.Parameter = RegRecPtr->NotificationParam;
-    
+
         CFE_SB_TimeStampMsg((CFE_SB_Msg_t *) &CFE_TBL_TaskData.NotifyMsg);
         Status = CFE_SB_SendMsg((CFE_SB_Msg_t *) &CFE_TBL_TaskData.NotifyMsg);
-    
+
         if (Status != CFE_SUCCESS)
         {
             CFE_EVS_SendEvent(CFE_TBL_FAIL_NOTIFY_SEND_ERR_EID,
@@ -1571,11 +1573,10 @@ int32 CFE_TBL_SendNotificationMsg(CFE_TBL_RegistryRec_t *RegRecPtr)
                               (unsigned int)Status);
         }
     }
-    
+
     return Status;
 }
 
 /************************/
 /*  End of File Comment */
 /************************/
-

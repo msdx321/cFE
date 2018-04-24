@@ -1,13 +1,13 @@
 /*
 ** $Id: fm_platform_cfg.h 1.19.1.3 2015/02/28 18:10:56EST sstrege Exp  $
 **
-**  Copyright © 2007-2014 United States Government as represented by the 
-**  Administrator of the National Aeronautics and Space Administration. 
-**  All Other Rights Reserved.  
+**  Copyright ï¿½ 2007-2014 United States Government as represented by the
+**  Administrator of the National Aeronautics and Space Administration.
+**  All Other Rights Reserved.
 **
 **  This software was created at NASA's Goddard Space Flight Center.
-**  This software is governed by the NASA Open Source Agreement and may be 
-**  used, distributed and modified only pursuant to the terms of that 
+**  This software is governed by the NASA Open Source Agreement and may be
+**  used, distributed and modified only pursuant to the terms of that
 **  agreement.
 **
 ** Title: File Manager (FM) Platform Configuration Header File
@@ -23,23 +23,23 @@
 **    Flight Software Branch C Coding Standard Version 1.0a
 **
 ** $Log: fm_platform_cfg.h  $
-** Revision 1.19.1.3 2015/02/28 18:10:56EST sstrege 
+** Revision 1.19.1.3 2015/02/28 18:10:56EST sstrege
 ** Added copyright information
-** Revision 1.19.1.2 2015/01/18 13:10:22EST sstrege 
+** Revision 1.19.1.2 2015/01/18 13:10:22EST sstrege
 ** Change FM child task priority from 200 to 205
-** Revision 1.19.1.1 2015/01/16 17:17:01EST lwalling 
+** Revision 1.19.1.1 2015/01/16 17:17:01EST lwalling
 ** Change FM child task priority from 162 to 200
-** Revision 1.19 2011/01/12 14:37:24EST lwalling 
+** Revision 1.19 2011/01/12 14:37:24EST lwalling
 ** Move mission revision number to platform config header file
-** Revision 1.18 2010/02/23 11:36:07EST lwalling 
+** Revision 1.18 2010/02/23 11:36:07EST lwalling
 ** Change application name from FM_APP to FM per CFS naming convention
-** Revision 1.17 2010/01/11 14:31:39EST lwalling 
+** Revision 1.17 2010/01/11 14:31:39EST lwalling
 ** Change default table pathname to /cf/apps/fm_freespace.tbl
-** Revision 1.16 2009/11/13 16:32:13EST lwalling 
+** Revision 1.16 2009/11/13 16:32:13EST lwalling
 ** Modify macro names, update all descriptive text
-** Revision 1.15 2009/11/09 16:50:31EST lwalling 
+** Revision 1.15 2009/11/09 16:50:31EST lwalling
 ** Change use of term destination to target
-** Revision 1.14 2009/10/30 14:02:34EDT lwalling 
+** Revision 1.14 2009/10/30 14:02:34EDT lwalling
 ** Remove trailing white space from all lines
 ** Revision 1.13 2009/10/27 17:33:02EDT lwalling
 ** Make file buffer configuration definitions common for all child command handlers
@@ -94,7 +94,7 @@
 **       no limits on the definition.  Refer to CFE Executive Services
 **       for specific information on limits related to application names.
 */
-#define FM_APP_NAME "FM"
+#define FM_APP_NAME "fm"
 
 
 /** \fmcfg File Manager Command Pipe Name
@@ -127,7 +127,7 @@
 
 
 /** \sccfg Mission specific version number for FM application
-**  
+**
 **  \par Description:
 **       An application version number consists of four parts:
 **       major version number, minor version number, revision
@@ -442,7 +442,7 @@
 **
 **  \par Description:
 **       Table data is verified during the table load process.  Should
-**       the validation process fail, this value will be returned by 
+**       the validation process fail, this value will be returned by
 **       FM to cFE Table Services and displayed in an event message.
 **
 **  \par Limits:
