@@ -42,18 +42,17 @@
 
 # sample apps
 THE_APPS := sample_lib sample_app
-# scheduling lib
-THE_APPS += sch_lab
+# apps we build only for their message ids
+THE_APPS += ci_lab to_lab hc lc
 # Real apps
-THE_APPS += hs mm ds fm sc
+THE_APPS += hs mm ds fm sc sch_lab
 # cFE library required by real apps
 THE_APPS += cfs_lib
 
 export THE_APPS
 
 # List of apps that include tables for the build
-THE_TBLS :=
-#THE_TBLS += ds fm hk lc sc sch
+THE_TBLS += ds fm hs sc
 #THE_TBLS += cf hs
 export THE_TBLS
 
