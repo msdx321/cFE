@@ -94,7 +94,7 @@
 **       no limits on the definition.  Refer to CFE Executive Services
 **       for specific information on limits related to application names.
 */
-#define FM_APP_NAME "fm"
+#define FM_APP_NAME "FM"
 
 
 /** \fmcfg File Manager Command Pipe Name

@@ -71,7 +71,7 @@
 **       no limits on the definition.  Refer to CFE Executive Services
 **       for specific information on limits related to application names.
 */
-#define HS_APP_NAME                    "hs"
+#define HS_APP_NAME                    "HS"
 
 /**\hscfg Idle Task Configuration Parameters (custom)
 **
