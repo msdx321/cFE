@@ -1,0 +1,12 @@
+COMPOSITE_DIR=/home/vagrant/cFE2cos/composite/
+COMPOSITE_TRANSFER_DIR=/home/vagrant/cFE2cos/composite/transfer/
+COMPOSITE_MAKE_ROOT=/home/vagrant/cFE2cos/composite/src/
+COMPOSITE_IMPL_NO_INTERFACE_DIR=/home/vagrant/cFE2cos/composite/src/components/implementation/no_interface/
+COMPOSITE_CFE_COMPONENT_ROOT=/home/vagrant/cFE2cos/composite/src/components/implementation/no_interface/cFE_booter/
+COMPOSITE_CFE_HEADER_DESTINATION=/home/vagrant/cFE2cos/composite/src/components/implementation/no_interface/cFE_booter/gen/
+CFE_DIR=/home/vagrant/cFE2cos/composite/src/extern/cFE/
+CFE_MAKE_ROOT=/home/vagrant/cFE2cos/composite/src/extern/cFE/build/cpu1/
+CFE_OBJECT_LOCATION=/home/vagrant/cFE2cos/composite/src/extern/cFE/build/cpu1/exe/
+CFE_OBJECT_NAME=composite_cFE.o
+COMPOSITE_CFE_UT_DESTINATION=/home/vagrant/cFE2cos/composite/src/components/implementation/no_interface/cFE_booter/test/
+OSAL_UT_DIR=/home/vagrant/cFE2cos/composite/src/extern/cFE/osal/src/unit-tests/
