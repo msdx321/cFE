@@ -16,7 +16,7 @@ WARNINGS=-Wall -Wstrict-prototypes
 ## Path to targeted libc for cross compilation.
 ##
 
-LIBC_PATH=/home/vagrant/cFE2cos/composite/src/components/lib/musl-1.1.11
+LIBC_PATH=/home/hobbes/Research/composite/src/components/lib/musl-1.1.11
 
 ##
 ## Host OS Include Paths ( be sure to put the -I switch in front of each directory )
