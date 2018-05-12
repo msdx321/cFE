@@ -6,6 +6,9 @@
 ## Modifications:
 ##
 ###############################################################################
+
+include $(CFS_MISSION)/Makefile.cosinc
+
 ##
 ## Warning Level Configuration
 ##
@@ -16,7 +19,7 @@ WARNINGS=-Wall -Wstrict-prototypes
 ## Path to targeted libc for cross compilation.
 ##
 
-LIBC_PATH=/home/hobbes/Research/composite/src/components/lib/musl-1.1.11
+LIBC_PATH=$(COMPOSITE_MAKE_ROOT)/components/lib/musl-1.1.11
 
 ##
 ## Host OS Include Paths ( be sure to put the -I switch in front of each directory )
