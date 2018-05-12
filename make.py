@@ -7,6 +7,8 @@ import subprocess as sp
 import sys
 import glob
 
+COS_CONSTANTS_FILE = "Makefile.cosinc"
+
 # Load command line arguments.
 parser = argparse.ArgumentParser(description='Operate the cFE build system for composite')
 parser.add_argument('-c', '--clean', dest='clean', action='store_true',
@@ -58,6 +60,21 @@ COMPOSITE_CFE_UT_DESTINATION = COMPOSITE_CFE_COMPONENT_ROOT + "test/"
 OSAL_UT_DIR = CFE_DIR + "osal/src/unit-tests/"
 print "OSAL_UT_DIR: {}".format(OSAL_UT_DIR)
 print "COMPOSITE_CFE_UT_DESTINATION: {}".format(COMPOSITE_CFE_UT_DESTINATION)
+
+# Create a make include file with all the macros!
+with open(COS_CONSTANTS_FILE, "w") as cosfile:
+    cosfile.write("COMPOSITE_DIR=%s\n" % COMPOSITE_DIR)
+    cosfile.write("COMPOSITE_TRANSFER_DIR=%s\n" % COMPOSITE_TRANSFER_DIR)
+    cosfile.write("COMPOSITE_MAKE_ROOT=%s\n" % COMPOSITE_MAKE_ROOT)
+    cosfile.write("COMPOSITE_IMPL_NO_INTERFACE_DIR=%s\n" % COMPOSITE_IMPL_NO_INTERFACE_DIR)
+    cosfile.write("COMPOSITE_CFE_COMPONENT_ROOT=%s\n" % COMPOSITE_CFE_COMPONENT_ROOT)
+    cosfile.write("COMPOSITE_CFE_HEADER_DESTINATION=%s\n" % COMPOSITE_CFE_HEADER_DESTINATION)
+    cosfile.write("CFE_DIR=%s\n" % CFE_DIR)
+    cosfile.write("CFE_MAKE_ROOT=%s\n" % CFE_MAKE_ROOT)
+    cosfile.write("CFE_OBJECT_LOCATION=%s\n" % CFE_OBJECT_LOCATION)
+    cosfile.write("CFE_OBJECT_NAME=%s\n" % CFE_OBJECT_NAME)
+    cosfile.write("COMPOSITE_CFE_UT_DESTINATION=%s\n" % COMPOSITE_CFE_UT_DESTINATION)
+    cosfile.write("OSAL_UT_DIR=%s\n" % OSAL_UT_DIR)
 
 # We don't need these stubs because we already provide our own.
 # Copying them over causes duplicate symbol errors

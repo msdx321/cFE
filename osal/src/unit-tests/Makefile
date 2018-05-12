@@ -1,3 +1,5 @@
+include $(CFS_MISSION)/Makefile.cosinc
+
 CC = gcc
 C_VERSION = c99
 
@@ -7,7 +9,7 @@ SUBDIRS := $(foreach testname,$(TESTS),$(testname)-test) shared
 OTHER_ARCH_FILES := $(shell find -regextype posix-extended -regex '.*_(arinc653|vxworks)\.c' -printf '%P\n')
 COMPOSITE_FILES := $(foreach dir,$(SUBDIRS),$(wildcard $(dir)/*_composite.c))
 
-LIBC_PATH=/home/vagrant/cFE2cos/composite/src/components/lib/musl-1.1.11
+LIBC_PATH=$(COMPOSITE_MAKE_ROOT)/components/lib/musl-1.1.11
 
 # Ignore the non-composite counterparts of *_composite.c files
 IGNORE := $(OTHER_ARCH_FILES) shared/ut_osloader_stubs.c $(COMPOSITE_FILES:_composite.c=.c)
