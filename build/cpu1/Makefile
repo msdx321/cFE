@@ -45,9 +45,9 @@ THE_APPS := sample_lib sample_app
 # apps we build only for their message ids
 THE_APPS += ci_lab to_lab hc lc
 # Real apps
-THE_APPS += hs mm ds fm sc sch_lab
-# cFE library required by real apps
-THE_APPS += cfs_lib
+THE_APPS += hs mm ds fm sc sch_lab f42 i42
+# Libs
+THE_APPS += cfs_lib osk_app_fw
 
 export THE_APPS
 

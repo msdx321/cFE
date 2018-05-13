@@ -8,6 +8,7 @@ build/cpu1/exe/.cdskeyfile
 build/cpu1/exe/.reservedkeyfile
 build/cpu1/exe/.resetkeyfile
 build/cpu1/exe/cf/
+!build/cpu1/exe/cf/f42_ctrl_tbl.json
 build/cpu1/exe/cFE_fs.tar
 
 build/cpu1/inc/
@@ -20,6 +21,9 @@ build/cpu1/hs/
 build/cpu1/lc/
 build/cpu1/mm/
 build/cpu1/sc/
+build/cpu1/f42/
+build/cpu1/i42/
+build/cpu1/osk_app_fw/
 
 build/cpu1/sample_app/
 build/cpu1/sample_lib/

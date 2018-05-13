@@ -111,7 +111,9 @@ CFE_APPS = [
     "ds",
     "fm",
     "sc",
-    "sch_lab"
+    "sch_lab",
+    "f42",
+    "i42"
 ]
 
 
@@ -184,10 +186,12 @@ print "Copied {} to {}".format(OBJECT_SOURCE, OBJECT_DESTINATION)
 print "=== Copying apps ==="
 for app in CFE_APPS:
     dest = COMPOSITE_IMPL_NO_INTERFACE_DIR + app + "/cFE_"
+    sp.check_call("cp build/cpu1/osk_app_fw/*.o " + COMPOSITE_IMPL_NO_INTERFACE_DIR + app + "/",
+                  shell=True, cwd=CFE_DIR)
+    shutil.copy('build/cpu1/cfs_lib/cfs_utils.o', dest + 'cfs_utils.o')
     for src in glob.glob(CFE_MAKE_ROOT + app + "/*.o"):
         basename = os.path.basename(src)
         print "Copying object '{}' to '{}'.".format(basename, dest + basename)
-        shutil.copy('build/cpu1/cfs_lib/cfs_utils.o', dest + 'cfs_utils.o')
         shutil.copy(src, dest + basename)
 
 print "=== Integrating Tar Filesystem  ==="

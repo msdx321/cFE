@@ -5,6 +5,8 @@ CFE_APP, /cf/apps/fm.so,          FM_AppMain,      FM,           50,   8192, 0x0
 CFE_APP, /cf/apps/sc.so,          SC_AppMain,      SC,           50,   8192, 0x0, 0;
 CFE_APP, /cf/apps/ds.so,          DS_AppMain,      DS,           50,   8192, 0x0, 0;
 CFE_APP, /cf/apps/mm.so,          MM_AppMain,      MM,           50,   8192, 0x0, 0;
+! CFE_APP, /cf/apps/f42.so,         F42_AppMain,     f42,          50,   8192, 0x0, 0;
+! CFE_APP, /cf/apps/i42.so,         I42_AppMain,     i42,          50,   8192, 0x0, 0;
 
 ! Startup script fields:
 ! 1. Object Type      -- CFE_APP for an Application, or CFE_LIB for a library.
