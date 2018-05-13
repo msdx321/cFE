@@ -1367,7 +1367,7 @@ int32 CFE_ES_WriteToSysLog(const char *SpecStringPtr, ...)
         /* if the index is already out of bounds, the log is full */
         if ( CFE_ES_ResetDataPtr->SystemLogIndex >= CFE_ES_SYSTEM_LOG_SIZE )  
         {
-            OS_printf("Warning: System Log full, log entry discarded.\n");
+            //OS_printf("Warning: System Log full, log entry discarded.\n");
             ReturnCode = CFE_ES_ERR_SYS_LOG_FULL;
         }   
         /* if the message will not fit in the remaining space, truncate it */  

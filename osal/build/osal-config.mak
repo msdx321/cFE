@@ -18,7 +18,7 @@
 ## OS = rtems
 ## OS = vxworks6 
 ##---------------------------------------------------------
-OS = posix
+OS = composite
 
 ##---------------------------------------------------------
 ## BSP -- BSP/Operating system for the board
@@ -32,7 +32,7 @@ OS = posix
 ## BSP = sis-rtems           -- RTEMS Sparc Instruction Simulator (GDB)
 ## BSP = sparc-vxworks6.7    -- ut699 SPARC Leon3 development board
 ##---------------------------------------------------------
-BSP = pc-linux
+BSP = pc-composite
 
 ##---------------------------------------------------------
 ## OSAL_M32 -- optional, build 32-bit images on 64-bit build machines
