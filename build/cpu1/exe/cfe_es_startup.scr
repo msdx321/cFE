@@ -5,6 +5,7 @@ CFE_APP, /cf/apps/fm.so,          FM_AppMain,      FM,           50,   8192, 0x0
 CFE_APP, /cf/apps/sc.so,          SC_AppMain,      SC,           50,   8192, 0x0, 0;
 CFE_APP, /cf/apps/ds.so,          DS_AppMain,      DS,           50,   8192, 0x0, 0;
 CFE_APP, /cf/apps/mm.so,          MM_AppMain,      MM,           50,   8192, 0x0, 0;
+! CFE_APP, /cf/apps/tele.so,        TELE_AppMain,    TELE,         50,   8192, 0x0, 0;
 ! CFE_APP, /cf/apps/f42.so,         F42_AppMain,     f42,          50,   8192, 0x0, 0;
 ! CFE_APP, /cf/apps/i42.so,         I42_AppMain,     i42,          50,   8192, 0x0, 0;
 
