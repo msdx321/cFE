@@ -1,7 +1,8 @@
 *.o
 *.so
 *.tbl
-*.cosinc
+
+Makefile.cosinc
 
 build/cpu1/ci_lab/
 build/cpu1/elf2cfetbl/
