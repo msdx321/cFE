@@ -136,9 +136,6 @@ if args.skew:
 
 # Execute build
 if args.clean:
-    print "=== Cleaning Composite ==="
-    sp.check_call("rm -rf *", shell=True, cwd=COMPOSITE_TRANSFER_DIR)
-    sp.check_call("make clean" + OUT, shell=True, cwd=COMPOSITE_MAKE_ROOT)
     print "=== Cleaning cFE ==="
     sp.check_call("make clean" + OUT, shell=True, cwd=CFE_MAKE_ROOT)
 
@@ -171,6 +168,8 @@ if args.copy_only:
 
 print "=== Building cFE ==="
 
+sp.check_call("rm -f cf/apps/cFE_fs.o", shell=True, cwd=CFE_OBJECT_LOCATION)
+sp.check_call("rm -f cFE_fs.o", shell=True, cwd=CFE_OBJECT_LOCATION)
 sp.check_call("make" + OUT, shell=True, cwd=CFE_MAKE_ROOT)
 
 print "=== Copying cFE Object ==="
