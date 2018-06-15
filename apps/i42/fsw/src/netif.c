@@ -1,12 +1,12 @@
-/* 
+/*
 ** Purpose: Network interface
 **
 ** Notes:
-**   1. TODO - Create a single NetIf library, add to app_fw, and use in TF and I42. 
+**   1. TODO - Create a single NetIf library, add to app_fw, and use in TF and I42.
 **
 ** License:
 **   Written by David McComas, licensed under the copyleft GNU
-**   General Public License (GPL). 
+**   General Public License (GPL).
 **
 ** References:
 **   1. OpenSatKit Object-based Application Developer's Guide.
@@ -45,8 +45,10 @@ static boolean InitSocket(const char *HostName, uint16 Port, boolean AllowBlocki
 */
 void NETIF42_Close(void) {
 
+   OS_printf("Called stubbed %s\n", __func__);
+#if 0
    if (NetIf->Connected == TRUE) {
-    
+
       //Crashes fdclose (NetIf->StreamId);
       close(NetIf->SocketFd);
       NetIf->Connected = FALSE;
@@ -54,12 +56,13 @@ void NETIF42_Close(void) {
       CFE_EVS_SendEvent(NETIF_SOCKET_CLOSE_INFO_EID, CFE_EVS_INFORMATION,
                         "Successfully closed socket");
 
-  
+
    } /* End if connected */
    else {
       CFE_EVS_SendEvent(NETIF_SOCKET_CLOSE_INFO_EID, CFE_EVS_INFORMATION,
                         "Attempt to close socket without a connection");
    }
+#endif
 
 } /* End NETIF42_Close() */
 
@@ -75,16 +78,19 @@ void NETIF42_Close(void) {
 */
 void NETIF42_Constructor(NETIF_Class*  NetIfPtr, const char* IpAddrStr, uint16 Port) {
 
+   OS_printf("Called stubbed %s\n", __func__);
+#if 0
    NetIf = NetIfPtr;
 
    CFE_PSP_MemSet((void*)NetIf, 0, sizeof(NETIF_Class));
-   
+
    NetIf->Port = Port;
    strncpy(NetIf->IpAddrStr, IpAddrStr, NETIF_IP_ADDR_STR_LEN);
 
    /* InitSocket reports errors */
    NetIf->Connected = InitSocket(NetIf->IpAddrStr,NetIf->Port, FALSE);
-   
+
+#endif
 } /* End NETIF42_Constructor() */
 
 
@@ -95,13 +101,15 @@ void NETIF42_Constructor(NETIF_Class*  NetIfPtr, const char* IpAddrStr, uint16 P
 boolean NETIF42_Connect42Cmd(void* ObjDataPtr, const CFE_SB_MsgPtr_t MsgPtr)
 {
 
+   OS_printf("Called stubbed %s\n", __func__);
+#if 0
    const NETIF_Connect42CmdParam* CmdParam = (const NETIF_Connect42CmdParam *) MsgPtr;
 
    NETIF42_Close();
 
    strncpy(NetIf->IpAddrStr, CmdParam->IpAddrStr, NETIF_IP_ADDR_STR_LEN);
    NetIf->Port = CmdParam->Port;
-   
+
    /* InitSocket reports errors */
    NetIf->Connected = InitSocket(NetIf->IpAddrStr, NetIf->Port, FALSE);
 
@@ -109,9 +117,10 @@ boolean NETIF42_Connect42Cmd(void* ObjDataPtr, const CFE_SB_MsgPtr_t MsgPtr)
       CFE_EVS_SendEvent(NETIF_CONNECT_TO_42_INFO_EID, CFE_EVS_INFORMATION,
                         "Connected to 42 simulator on %s port %d", NetIf->IpAddrStr,NetIf->Port);
    }
-   
-   return NetIf->Connected;
 
+   return NetIf->Connected;
+#endif
+   return TRUE;
 } /* End NETIF42_Connect42Cmd() */
 
 
@@ -124,10 +133,12 @@ boolean NETIF42_Connect42Cmd(void* ObjDataPtr, const CFE_SB_MsgPtr_t MsgPtr)
 boolean NETIF42_Disconnect42Cmd(void* ObjDataPtr, const CFE_SB_MsgPtr_t MsgPtr)
 {
 
+   OS_printf("Called stubbed %s\n", __func__);
+#if 0
    NETIF42_Close();
-   
+
+#endif
    return TRUE;
-   
 } /* End NETIF42_Disconnect42Cmd() */
 
 
@@ -136,7 +147,7 @@ boolean NETIF42_Disconnect42Cmd(void* ObjDataPtr, const CFE_SB_MsgPtr_t MsgPtr)
 **
 */
 void NETIF42_ResetStatus(void) {
-  
+
 
 } /* End NETIF_ResetStatus() */
 
@@ -145,37 +156,40 @@ void NETIF42_ResetStatus(void) {
 ** Function: NETIF42_Recv
 **
 */
-int32 NETIF42_Recv(char* BufPtr, const uint16 BufSize) 
+int32 NETIF42_Recv(char* BufPtr, const uint16 BufSize)
 {
 
+   OS_printf("Called stubbed %s\n", __func__);
+#if 0
    int   BytesRead = 0;
    int   TotalBytesRead = 0;
    int   BytesRemaining = (I42_SOCKET_BUF_LEN-2);
    char* InBufPtr = BufPtr;
    char* GetPtr = BufPtr;     /* Non-NULL value */
-   
+
 
    if (NetIf->Connected == TRUE) {
 
       while (TotalBytesRead < (I42_SOCKET_BUF_LEN-2) && GetPtr != NULL) {
 
          if( (GetPtr = fgets(InBufPtr,BytesRemaining,NetIf->StreamId)) != NULL ) {
-	
+
             //OS_printf("NETIF42_Recv(): Received sensor message (len=%d): %s",strlen(InBufPtr), InBufPtr);
             //OS_printf("NETIF42_Recv(): Received message (len=%d)\n",strlen(InBufPtr));
             TotalBytesRead += strlen(InBufPtr);
 
-         }         
+         }
 
       } /* End while loop */
-      
+
    } /* End if connected */
    else
       CFE_EVS_SendEvent(NETIF_RECV_ERR_EID,CFE_EVS_ERROR,
                         "Error attempting network read without being connected");
 
    return TotalBytesRead;
-   
+#endif
+   return 0;
 } /* NETIF42_Recv() */
 
 
@@ -183,9 +197,11 @@ int32 NETIF42_Recv(char* BufPtr, const uint16 BufSize)
 ** Function: NETIF42_Send
 **
 */
-int32 NETIF42_Send (const char *BufPtr, uint16 Len) 
+int32 NETIF42_Send (const char *BufPtr, uint16 Len)
 {
-   
+
+   OS_printf("Called stubbed %s\n", __func__);
+#if 0
    int32 BytesSent = 0;
 
    if (NetIf->Connected)
@@ -193,10 +209,11 @@ int32 NETIF42_Send (const char *BufPtr, uint16 Len)
    else
       CFE_EVS_SendEvent(NETIF_SEND_ERR_EID,CFE_EVS_ERROR,
                         "Error attempting network send without being connected");
-	   
+
 
    return BytesSent;
-
+#endif
+   return 0;
 } /* End NETIF42_Send() */
 
 
@@ -207,13 +224,15 @@ int32 NETIF42_Send (const char *BufPtr, uint16 Len)
 static boolean InitSocket(const char *HostName, uint16 Port, boolean AllowBlocking)
 {
 
+   OS_printf("Called stubbed %s\n", __func__);
+#if 0
    int SocketFd, Flags;
    struct sockaddr_in  Server;
    struct hostent*     Host;
 
 
    NetIf->Connected = FALSE;
-   strcpy(NetIf->IpAddrStr, HostName);  
+   strcpy(NetIf->IpAddrStr, HostName);
 
    SocketFd = socket(AF_INET,SOCK_STREAM,0);
    if (SocketFd < 0) {
@@ -233,7 +252,7 @@ static boolean InitSocket(const char *HostName, uint16 Port, boolean AllowBlocki
    Server.sin_family = AF_INET;
    memcpy((char *)&Server.sin_addr.s_addr,(char *)Host->h_addr_list[0], Host->h_length);
    Server.sin_port = htons(Port);
-   
+
    OS_printf("***I42 NETIF***: Attempting to connect to Server %s on Port %d\n",HostName, Port);
    if (connect(SocketFd,(struct sockaddr *) &Server, sizeof(Server)) < 0) {
       CFE_EVS_SendEvent(NETIF_CONNECT_ERR_EID,CFE_EVS_ERROR,
@@ -263,7 +282,8 @@ static boolean InitSocket(const char *HostName, uint16 Port, boolean AllowBlocki
    } /* End if valid SocketFd */
 
    return NetIf->Connected;
-      
+#endif
+   return TRUE;
 } /* End InitSocket() */
 
 

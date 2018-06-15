@@ -4,14 +4,14 @@
 **
 ** Notes:
 **   1. This is part of prototype effort to port a 42 simulator FSW controller
-**      component into a cFS-based application 
+**      component into a cFS-based application
 **   2. These macros can only be build with the application and can't
 **      have a platform scope because the same app_cfg.h file name is used for
 **      all applications following the object-based application design.
 **
 ** License:
 **   Written by David McComas, licensed under the copyleft GNU
-**   General Public License (GPL). 
+**   General Public License (GPL).
 **
 ** References:
 **   1. OpenSatKit Object-based Application Developer's Guide.
@@ -56,7 +56,7 @@
 **
 ** Define the base event message IDs used by each object/component used by the
 ** application. There are no automated checks to ensure an ID range is not
-** exceeded so it is the developer's responsibility to verify the ranges. 
+** exceeded so it is the developer's responsibility to verify the ranges.
 */
 
 
@@ -69,6 +69,17 @@
 
 #define NETIF_RECV_BUFF_LEN 512
 
-
+/******************************************************************************
+** Sensor emulation macros
+**
+** Composite side of the system runs a PERIODIC thread and writes to Queue
+** with a trace that is dumped from a 42 simulator's execution.
+**
+** These macros should match the macros used on the Composite side in
+** <cos_side_cfe_dir>/cFE_sensoremu.c
+*/
+#define I42_SENSOREMU_Q_NAME "SENSOR_EMU_QUEUE"
+#define I42_SENSOREMU_Q_DEPTH 20
+#define I42_SENSOREMU_DATASZ 512
 
 #endif /* _app_cfg_ */
