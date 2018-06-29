@@ -40,20 +40,12 @@
 
 # List of apps/libs to include in the build
 
-# sample apps
-THE_APPS := sample_lib sample_app
-# apps we build only for their message ids
-THE_APPS += ci_lab to_lab hc lc
-# Real apps
-THE_APPS += hs mm ds fm sc sch_lab f42 i42
-# Libs
-THE_APPS += cfs_lib osk_app_fw
+THE_APPS := bm cfs_lib cs ds expat_lib f42 fm hc hs i42 kit_to kit_ci kit_sch lc md mm osk_app_fw sc sim tftp
 
 export THE_APPS
 
 # List of apps that include tables for the build
-THE_TBLS += ds fm hs sc
-#THE_TBLS += cf hs
+THE_TBLS += cs ds fm hc hs kit_sch lc md sc
 export THE_TBLS
 
 #===============================================================================

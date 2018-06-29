@@ -12,6 +12,7 @@ build/cpu1/exe/.resetkeyfile
 build/cpu1/exe/cf/
 !build/cpu1/exe/cf/f42_ctrl_tbl.json
 build/cpu1/exe/cFE_fs.tar
+build/cpu1/exe/*.xml
 
 build/cpu1/inc/
 
@@ -31,5 +32,16 @@ build/cpu1/sample_app/
 build/cpu1/sample_lib/
 build/cpu1/sch_lab/
 build/cpu1/to_lab/
+build/cpu1/bm/
+build/cpu1/cs/
+build/cpu1/expat_lib/
+build/cpu1/kit_ci/
+build/cpu1/kit_sch/
+build/cpu1/kit_to/
+build/cpu1/md/
+build/cpu1/sim/
+build/cpu1/tftp/
 
 build/mission_inc/
+
+cscope.out

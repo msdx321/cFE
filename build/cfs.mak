@@ -224,6 +224,9 @@ cfs_install_app_tbls::
 	    test ! -f $${app}/$${app}_tables.mak                        \
 	    || $(MAKE) -f $${app}_tables.mak -C $${app} install         \
 	    || exit 1;                                                  \
+	    ! test $${app} = "kit_sch"                                  \
+	    || cp $(CFS_APP_SRC)/$${app}/fsw/tables/*.xml $(CFS_EXE)    \
+	    || exit 1;                                                  \
 	 done
 
 #-------------------------------------------------------------------------------
@@ -243,14 +246,19 @@ cfs_copy_installs::
 	-chmod 775 $(CFS_EXE)/*.$(CFE_CORE_EXE_TYPE) 
 	-chmod 644 $(CFS_EXE)/*.$(CFS_APP_EXE_TYPE) 
 	-chmod 644 $(CFS_EXE)/*.tbl
+	-chmod 644 $(CFS_EXE)/*.xml
+	-chmod 644 $(CFS_EXE)/*.json
 	-chmod 644 $(CFS_EXE)/*.scr
 	@echo ""
 	@echo " >> Copy Files <<"
 	@- $(CP_ALWAYS) $(CFS_EXE)/*.$(CFE_CORE_EXE_TYPE) $(CFS_PROM_APPS)
 	@- $(CP_ALWAYS) $(CFS_EXE)/*.$(CFS_APP_EXE_TYPE) $(CFS_PROM_APPS)
 	@- $(CP_ALWAYS) $(CFS_EXE)/*.tbl $(CFS_PROM_APPS)
+	@- $(CP_ALWAYS) $(CFS_EXE)/*.xml $(CFS_PROM)
+	@- $(CP_ALWAYS) $(CFS_EXE)/*.json $(CFS_PROM)
+#	@- $(CP_ALWAYS) $(CFS_EXE)/*.xml $(CFS_PROM_APPS)
 	@echo ""
-	@- $(CP_ALWAYS) $(CFS_EXE)/run $(CFS_PROM_APPS)
+#	@- $(CP_ALWAYS) $(CFS_EXE)/run $(CFS_PROM_APPS)
 	@- $(CP_ALWAYS) $(CFS_EXE)/cfe_es_startup.scr $(CFS_PROM_APPS)
 
 #-------------------------------------------------------------------------------
@@ -294,6 +302,7 @@ cfs_clean_build_exe::
 	@- $(RM_FILES) exe/*.$(CFE_CORE_EXE_TYPE)
 	@- $(RM_FILES) exe/*.$(CFS_APP_EXE_TYPE)
 	@- $(RM_FILES) exe/*.tbl
+	@- $(RM_FILES) exe/*.xml
 
 #-------------------------------------------------------------------------------
 
