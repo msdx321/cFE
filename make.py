@@ -108,20 +108,21 @@ CFE_HEADERS_TO_COPY = [
 CFE_APPS = [
     "bm",
     "cs",
-    "f42",
-    "hc",
-    "md",
-    "sc",
-    "sim",
     "ds",
+    "f42",
     "fm",
+    "hc",
     "hs",
     "i42",
     "kit_ci",
     "kit_to",
     "kit_sch",
     "lc",
+    "md",
     "mm",
+    "sc",
+    "sch_lab",
+    "sim",
     "tftp"
 ]
 

@@ -49,8 +49,8 @@
   <!--*****************-->
 
   <!-- MD -->
-  <slot id="2" entry="0" enable="true" frequency="5" offset="0" msg_id="18" />
-  <slot id="2" entry="1" enable="true" frequency="1" offset="0" msg_id="19" />
+  <!-- slot id="2" entry="0" enable="true" frequency="5" offset="0" msg_id="18" /> -->
+  <!-- <slot id="2" entry="1" enable="true" frequency="1" offset="0" msg_id="19" /> -->
 
   <!-- MM -->
   <slot id="2" entry="2" enable="true" frequency="5" offset="0" msg_id="20" />

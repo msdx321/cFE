@@ -7,9 +7,9 @@
 ** Author:   R.McGraw/SSI
 **
 ** $Log: cfe_platform_cfg.h  $
-** Revision 1.35 2014/09/09 13:59:50GMT-05:00 lwalling 
+** Revision 1.35 2014/09/09 13:59:50GMT-05:00 lwalling
 ** Describe effects of removing Table Services from CFE on definition of CFE_ES_MAX_BLOCK_SIZE
-** Revision 1.34 2014/08/21 15:29:47EDT rmcgraw 
+** Revision 1.34 2014/08/21 15:29:47EDT rmcgraw
 ** DCR22696:1 Added #define CFE_ES_EXCEPTION_FUNCTION
 ** Revision 1.33 2014/08/19 15:01:27EDT sstrege
 ** Updated reference to OS_BSPGetUserReservedArea to CFE_PSP_GetUserReservedArea
@@ -553,7 +553,7 @@
 **       Enable the 1HZ packet by setting #CFE_TIME_ENA_1HZ_CMD_PKT to TRUE.
 **       Disable the 1HZ packet by setting #CFE_TIME_ENA_1HZ_CMD_PKT to FALSE.
 */
-#define CFE_TIME_ENA_1HZ_CMD_PKT  TRUE 
+#define CFE_TIME_ENA_1HZ_CMD_PKT  TRUE
 
 
 /**
@@ -1074,7 +1074,7 @@
 **
 **  \par Description:
 **       Defines the filter mask for disabling all performance entries. The value is a
-**       bit mask.  For each bit, 0 means the corresponding entry is disabled and 
+**       bit mask.  For each bit, 0 means the corresponding entry is disabled and
 **       1 means it is enabled.
 */
 #define CFE_ES_PERF_FILTMASK_NONE              0
@@ -1084,7 +1084,7 @@
 **
 **  \par Description:
 **       Defines the filter mask for enabling all performance entries. The value is a
-**       bit mask.  For each bit, 0 means the corresponding entry is disabled and 
+**       bit mask.  For each bit, 0 means the corresponding entry is disabled and
 **       1 means it is enabled.
 */
 #define CFE_ES_PERF_FILTMASK_ALL               ~CFE_ES_PERF_FILTMASK_NONE
@@ -1094,7 +1094,7 @@
 **
 **  \par Description:
 **       Defines the default filter mask for the performance data buffer. The value is a
-**       bit mask.  For each bit, 0 means the corresponding entry is disabled and 1 
+**       bit mask.  For each bit, 0 means the corresponding entry is disabled and 1
 **       means it is enabled.
 **
 */
@@ -1105,8 +1105,8 @@
 **  \cfeescfg Define Default Filter Trigger Setting for Disabling All Performance Entries
 **
 **  \par Description:
-**       Defines the default trigger mask for disabling all performance data entries. The value 
-**       is a bit mask.  For each bit, 0 means the trigger for the corresponding entry is 
+**       Defines the default trigger mask for disabling all performance data entries. The value
+**       is a bit mask.  For each bit, 0 means the trigger for the corresponding entry is
 **       disabled and 1 means it is enabled.
 **
 */
@@ -1116,8 +1116,8 @@
 **  \cfeescfg Define Filter Trigger Setting for Enabling All Performance Entries
 **
 **  \par Description:
-**       Defines the trigger mask for enabling all performance data entries. The value is 
-**       a bit mask.  For each bit, 0 means the trigger for the corresponding entry is 
+**       Defines the trigger mask for enabling all performance data entries. The value is
+**       a bit mask.  For each bit, 0 means the trigger for the corresponding entry is
 **       disabled and 1 means it is enabled.
 **
 */
@@ -1128,7 +1128,7 @@
 **
 **  \par Description:
 **       Defines the default trigger mask for the performance data buffer. The value is a
-**       32-bit mask.  For each bit, 0 means the trigger for the corresponding entry is 
+**       32-bit mask.  For each bit, 0 means the trigger for the corresponding entry is
 **       disabled and 1 means it is enabled.
 **
 */
@@ -1139,9 +1139,9 @@
 **
 **  \par Description:
 **       This parameter defines the priority of the child task spawed by the
-**       Executive Services to write performance data to a file.  Lower numbers 
-**       are higher priority, with 1 being the highest priority in the case of a 
-**       child task. 
+**       Executive Services to write performance data to a file.  Lower numbers
+**       are higher priority, with 1 being the highest priority in the case of a
+**       child task.
 **
 **  \par Limits
 **       Valid range for a child task is 1 to 255 however, the priority cannot
@@ -1154,7 +1154,7 @@
 **
 **  \par Description:
 **       This parameter defines the stack size of the child task spawed by the
-**       Executive Services to write performance data to a file.  
+**       Executive Services to write performance data to a file.
 **
 **  \par Limits
 **       It is recommended this parameter be greater than or equal to 4KB. This parameter
@@ -1169,7 +1169,7 @@
 **  \par Description:
 **       This parameter defines the delay time (in milliseconds) between performance
 **       data file writes performed by the Executive Services Performace Analyzer
-**       Child Task.   
+**       Child Task.
 **
 **  \par Limits
 **       It is recommended this parameter be greater than or equal to 20ms. This parameter
@@ -1182,8 +1182,8 @@
 **  \cfeescfg Define Performance Analyzer Child Task Number of Entries Between Delay
 **
 **  \par Description:
-**       This parameter defines the number of performace analyzer entries the Performace 
-**       Analyzer Child Task will write to the file between delays.  
+**       This parameter defines the number of performace analyzer entries the Performace
+**       Analyzer Child Task will write to the file between delays.
 **
 */
 #define CFE_ES_PERF_ENTRIES_BTWN_DLYS             50
@@ -1297,7 +1297,7 @@
 */
 #define CFE_TIME_START_TASK_PRIORITY              60
 #define CFE_TIME_TONE_TASK_PRIORITY               25
-#define CFE_TIME_1HZ_TASK_PRIORITY                25
+#define CFE_TIME_1HZ_TASK_PRIORITY                26
 
 /**
 **  \cfetimecfg Define TIME Task Stack Sizes
