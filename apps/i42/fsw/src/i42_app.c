@@ -214,8 +214,8 @@ static int32 InitApp(void)
     * There could be races, so retry!
     * TODO: Limit retries and bail-out!
     */
-   sensordump_qid = 0;
 retryget:
+   sensordump_qid = 0;
    Status = OS_QueueGetIdByName(&sensordump_qid, I42_SENSOREMU_Q_NAME);
    if (Status != OS_SUCCESS) {
       if (Status == OS_ERR_NAME_NOT_FOUND) {
@@ -226,6 +226,7 @@ retryget:
       }
       if (Status != OS_SUCCESS) OS_printf("Failed to get sensor dump queue[%d], sensor emulation won't work!\n", Status);
    }
+   OS_printf("Got queue id for sensor queue = [%u]\n", sensordump_qid);
 
    /*
    ** Application startup event message

@@ -78,7 +78,7 @@
 ** These macros should match the macros used on the Composite side in
 ** <cos_side_cfe_dir>/cFE_sensoremu.c
 */
-#define I42_SENSOREMU_Q_NAME "SENSOR_EMU_QUEUE"
+#define I42_SENSOREMU_Q_NAME "SENSORTRACE_QUEUE"
 #define I42_SENSOREMU_Q_DEPTH 20
 #define I42_SENSOREMU_DATASZ 512
 
