@@ -1297,7 +1297,7 @@
 */
 #define CFE_TIME_START_TASK_PRIORITY              60
 #define CFE_TIME_TONE_TASK_PRIORITY               25
-#define CFE_TIME_1HZ_TASK_PRIORITY                26
+#define CFE_TIME_1HZ_TASK_PRIORITY                25
 
 /**
 **  \cfetimecfg Define TIME Task Stack Sizes
