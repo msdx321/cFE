@@ -5,8 +5,8 @@
 **   1. This is part of prototype effort to port a 42 simulator FSW controller
 **      component into a cFS-based application
 **   2. This object serves as a wrapper/adapter for the 42 FSW module. The cFS
-**      application should use this adapter for all interactions to/from the 
-**      42 interface. 
+**      application should use this adapter for all interactions to/from the
+**      42 interface.
 **   3. In a more complex design individual objects should be created for
 **      sensors and actuators.
 **
@@ -16,7 +16,7 @@
 **
 ** License:
 **   Written by David McComas, licensed under the copyleft GNU
-**   General Public License (GPL). 
+**   General Public License (GPL).
 */
 
 #ifndef _f42_adp_
@@ -66,7 +66,7 @@
 ** Type Definitions
 */
 
-typedef struct FSWType F42_FSW; 
+typedef struct FSWType F42_FSW;
 
 /******************************************************************************
 ** F42 Sensors
@@ -90,6 +90,7 @@ typedef struct
    double  Hw[3];
    int     SunValid;
 
+   unsigned long long time;
 } OS_PACK F42_ADP_SensorPkt;
 #define F42_ADP_SENSOR_PKT_LEN sizeof (F42_ADP_SensorPkt)
 
@@ -106,6 +107,7 @@ typedef struct
    double  MtbCmd[3];
    double  SaGimbalCmd;
 
+   unsigned long long time;
 } OS_PACK F42_ADP_ActuatorPkt;
 #define F42_ADP_ACTUATOR_PKT_LEN sizeof (F42_ADP_ActuatorPkt)
 
@@ -116,16 +118,16 @@ typedef struct
 
 typedef struct {
 
-   uint8   Override[F42_ADP_OVR_ID_CNT];   
-  
+   uint8   Override[F42_ADP_OVR_ID_CNT];
+
    uint16  CtrlMode;
 
    CTRLTBL_Class CtrlTbl;
-  
+
    F42_FSW Fsw;
-   
+
    F42_ADP_ActuatorPkt  ActuatorPkt;
-   
+
 } F42_ADP_Class;
 
 /******************************************************************************

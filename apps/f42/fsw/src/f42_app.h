@@ -3,17 +3,17 @@
 **
 ** Notes:
 **   1. This is part of prototype effort to port a 42 simulator FSW controller
-**      component into a cFS-based application 
+**      component into a cFS-based application
 **
 ** References:
 **   1. OpenSat Object-based Application Developer's Guide.
 **   2. cFS Application Developer's Guide.
-**   3. 42 open source repository at 
+**   3. 42 open source repository at
 **      https://sourceforge.net/projects/fortytwospacecraftsimulation/
 **
 ** License:
 **   Written by David McComas, licensed under the copyleft GNU
-**   General Public License (GPL). 
+**   General Public License (GPL).
 */
 #ifndef _f42_app_
 #define _f42_app_
@@ -49,11 +49,11 @@ typedef struct
 
    CMDMGR_Class     CmdMgr;
    TBLMGR_Class     TblMgr;
-   
+
    F42_ADP_Class    F42Adp;
 
    uint32           CtrlExeCnt;
-   
+
    int32            DbgFileHandle;
    boolean          DbgEnabled;
 
@@ -71,23 +71,23 @@ typedef struct
    uint16   InvalidCmdCnt;
 
    /*
-   ** TBLMGR Data 
-   ** - Loaded with status from the last table action 
+   ** TBLMGR Data
+   ** - Loaded with status from the last table action
    */
 
    uint8    LastAction;
    uint8    LastActionStatus;
-   
+
    /*
    ** Application Data
    */
-   
+
    uint32   CtrlExeCnt;
 
    /*
    ** 42 FSW Adapter Data
    */
-   
+
    uint16   CtrlMode;      /* 16-bit to keep aligned */
    uint16   OvrSunValid;   /* 16-bit to keep aligned */
 
@@ -98,7 +98,7 @@ typedef struct
    float    Kp[3];
 
    float    Hwcmd[3];
-   
+
 } OS_PACK F42_APP_HkPkt;
 #define F42_APP_TLM_HK_LEN sizeof (F42_APP_HkPkt)
 
@@ -106,7 +106,7 @@ typedef struct
 {
 
    uint8  Header[CFE_SB_TLM_HDR_SIZE];
-   
+
    float  wbn[3];
    float  qbr[4];
    float  AttErr[3];
@@ -115,9 +115,10 @@ typedef struct
    float  WhlCmd[3];
    float  MtbCmd[3];
    float  GimCmd;
-   
+
    uint16 SunValid;
 
+   unsigned long long time;
 } OS_PACK F42_APP_CtrlPkt;
 #define F42_APP_TLM_CTRL_PKT_LEN sizeof (F42_APP_CtrlPkt)
 

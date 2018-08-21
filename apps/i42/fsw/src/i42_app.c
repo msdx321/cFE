@@ -21,6 +21,8 @@
 #include <string.h>
 #include "i42_app.h"
 
+#define I42_TSCVAL(val) __asm__ __volatile__("rdtsc" : "=A" (val))
+
 /*
 ** Local Function Prototypes
 */
@@ -315,7 +317,7 @@ static boolean ProcessSensorData(void)
          //OS_printf("Sensor0: %s\n",&I42App.InBuf[100]);
 
          //if ((Status = sscanf(I42App.InBuf,"%lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %lf %d",
-         if ((Status = sscanf(I42App.InBuf,"%le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %d",
+         if ((Status = sscanf(I42App.InBuf,"%le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %d %llu",
             &(I42App.SensorPkt.DeltaTime),
             &(I42App.SensorPkt.PosN[0]),&(I42App.SensorPkt.PosN[1]),&(I42App.SensorPkt.PosN[2]),
             &(I42App.SensorPkt.VelN[0]),&(I42App.SensorPkt.VelN[1]),&(I42App.SensorPkt.VelN[2]),
@@ -325,7 +327,7 @@ static boolean ProcessSensorData(void)
             &(I42App.SensorPkt.svb[0]), &(I42App.SensorPkt.svb[1]), &(I42App.SensorPkt.svb[2]),
             &(I42App.SensorPkt.bvb[0]), &(I42App.SensorPkt.bvb[1]), &(I42App.SensorPkt.bvb[2]),
             &(I42App.SensorPkt.Hw[0]),  &(I42App.SensorPkt.Hw[1]),  &(I42App.SensorPkt.Hw[2]),
-            &(I42App.SensorPkt.SunValid))) == 27) {
+            &(I42App.SensorPkt.SunValid), &(I42App.SensorPkt.time))) == 28) {
 
             //OS_printf("I42::ProcessSensorData(): Hw = [%.8e, %.8e, %.8e]\n",
 		      //          I42App.SensorPkt.Hw[0],I42App.SensorPkt.Hw[1],I42App.SensorPkt.Hw[2]);
@@ -432,6 +434,7 @@ static boolean ProcessActuatorData(void)
       MsgId = CFE_SB_GetMsgId(MsgPtr);
 
       if (MsgId == F42_ACTUATOR_MID) {
+             unsigned long long now;
 
 	     ActuatorPkt = (F42_ADP_ActuatorPkt*)MsgPtr;
 
@@ -442,11 +445,13 @@ static boolean ProcessActuatorData(void)
        //OS_printf(">SaGimbalCmd = %18.8e\n", ActuatorPkt->SaGimbalCmd);
 
 		 //snprintf(I42App.OutBuf, sizeof(I42App.OutBuf), "%lf %lf %lf %lf %lf %lf %lf\n",
-		 snprintf(I42App.OutBuf, sizeof(I42App.OutBuf), "%18.8e %18.8e %18.8e %18.8e %18.8e %18.8e %18.8e\n",
-            ActuatorPkt->WhlTorqCmd[0], ActuatorPkt->WhlTorqCmd[1], ActuatorPkt->WhlTorqCmd[2],
-            ActuatorPkt->MtbCmd[0], ActuatorPkt->MtbCmd[1], ActuatorPkt->MtbCmd[2],
-            ActuatorPkt->SaGimbalCmd);
-
+//		 snprintf(I42App.OutBuf, sizeof(I42App.OutBuf), "%18.8e %18.8e %18.8e %18.8e %18.8e %18.8e %18.8e\n",
+//            ActuatorPkt->WhlTorqCmd[0], ActuatorPkt->WhlTorqCmd[1], ActuatorPkt->WhlTorqCmd[2],
+//            ActuatorPkt->MtbCmd[0], ActuatorPkt->MtbCmd[1], ActuatorPkt->MtbCmd[2],
+//            ActuatorPkt->SaGimbalCmd);
+		I42_TSCVAL(now);
+		/* TODO: calculate the diff from ActuatorPkt->time to time "now", that will be the RTT */
+		 //OS_printf("st:%llu, end:%llu, rtt: %llu\n", ActuatorPkt->time, now, (now - ActuatorPkt->time));
 		 PktSent = SendActuatorPkt(I42App.OutBuf, strlen(I42App.OutBuf));
 
       } /* end if F42_ACTUATOR_MID */

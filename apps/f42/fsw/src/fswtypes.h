@@ -163,6 +163,8 @@ struct FSWType {
    double Hvb[3];
 
    double Bold1,Bold2,xold,yold;
+
+   unsigned long long sttime; /* for RTT measurement */
 };
 
 /*
