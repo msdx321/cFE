@@ -118,7 +118,6 @@ typedef struct
 
    uint16 SunValid;
 
-   unsigned long long time;
 } OS_PACK F42_APP_CtrlPkt;
 #define F42_APP_TLM_CTRL_PKT_LEN sizeof (F42_APP_CtrlPkt)
 
