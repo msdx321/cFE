@@ -384,40 +384,32 @@ static boolean ProcessSensorData(void)
 
 } /* NETIF_ProcessSensorData() */
 
-#define I42_PERF_ITERS 10000000
-#define I42_RTT_ITERS  8
-#define I42_TSC_MAXLEN 24 /* size of 64bit val(19??) + 2 for "[]" */
-static char i42_rtt_buf[(I42_TSC_MAXLEN * I42_RTT_ITERS) + 1] = { 0 };
+#define I42_PERF_ITERS 3000 /* 500ms interval between requests.. = 25mins approx */
+static unsigned long long test_values[I42_PERF_ITERS] = { 0 };
+static unsigned int test_iters = 0;
 /* FIXME: follow CFS style! */
 static inline void
 rtt_measure(unsigned long long st_time)
 {
-	static unsigned int iters = 0, rtt_iters = 0;
-	static unsigned long long wc = 0, total = 0;
-	unsigned long long now = 0, diff = 0;
-	char time_buf[I42_TSC_MAXLEN + 1] = { 0 };
+	unsigned long long now = 0;
 
+	if (test_iters >= I42_PERF_ITERS) return;
 	I42_TSCVAL(now);
 
-	diff = now - st_time;
-	if (wc < diff) wc = diff;
-	total += diff;
-	sprintf(time_buf, "[%llu]", diff);
-	strcat(i42_rtt_buf, time_buf);
-	rtt_iters++;
-	iters++;
+	test_values[test_iters] = now - st_time;
+	test_iters++;
 
-	if (rtt_iters == I42_RTT_ITERS) {
-		OS_printf("%s\n", i42_rtt_buf);
-		rtt_iters = 0;
-		memset(i42_rtt_buf, 0, (I42_TSC_MAXLEN * I42_RTT_ITERS) + 1);
-	}
+	if (test_iters == I42_PERF_ITERS) {
+		unsigned int i = 0;
 
-	if (iters == I42_PERF_ITERS) {
-		OS_printf("RTT Avg:%llu, WC:%llu ITERS:%lu\n", total / iters, wc, iters);
-		iters = 0;
-		wc = 0;
-		total = 0;
+		for (;i < test_iters; i++) {
+			/* perhaps change OS_printf to not use PRINTC macro */
+			OS_printf("%llu\n", test_values[i]);
+			/* just print for post processing */
+		}
+		OS_printf("----------------------------------\n");
+		/* reset and get a fresh set! */
+		test_iters = 0;
 	}
 }
 
