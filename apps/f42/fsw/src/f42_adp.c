@@ -151,7 +151,9 @@ static void CopySensorPktToFswStruct(F42_ADP_SensorPkt*  SensorPkt) {
       F42Adp->Fsw.Hw[i]   = SensorPkt->Hw[i];
    }
    F42Adp->Fsw.qbn[3] = SensorPkt->qbn[3];
+#ifdef RTT_MEASURE
    F42Adp->Fsw.sttime = SensorPkt->time;
+#endif
 
 } /* End CopySensorPktToFswStruct() */
 
@@ -171,7 +173,9 @@ static void CopyFswStructToActuatorPkt(F42_ADP_ActuatorPkt* ActuatorPkt) {
       ActuatorPkt->MtbCmd[i]     = F42Adp->Fsw.Mmtbcmd[i];
    }
 
+#ifdef RTT_MEASURE
    ActuatorPkt->time = F42Adp->Fsw.sttime;
+#endif
 } /* End CopyFswStructToActuatorPkt() */
 
 

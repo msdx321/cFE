@@ -6,7 +6,7 @@
 **      component into a cFS-based application. The goal is to be able to port
 **      the 42 code code unchanged and have it run as a cFS app.
 **   2. The functions in this file were taken directly from 42fsw.c. 42's FSW
-**      data structure is used for all I/O. See function prologues for 
+**      data structure is used for all I/O. See function prologues for
 **      change details.
 **
 ** References:
@@ -38,28 +38,28 @@
 **   1. This function was adapted from 42fsw.c's InitFSW(). The following
 **      changes were made:
 **      A. Changed function input parameter from SCType *S to FSWType *FSW
-**      B. 42 reads SC definition text file for initial values. Removed 
+**      B. 42 reads SC definition text file for initial values. Removed
 **         generalized logic (e.g. number of wheels) and hard coded initial
 **         values using the Aura S/C definition file SC_Aura.txt.
-**   2. This is demonstration code and not flight code. There are many aspects 
+**   2. This is demonstration code and not flight code. There are many aspects
 **      of this code that would not be appropriate for flight. For example,
 **      typical FSW uses tables to define default parameter values and does
-**      not use dynamic memory allocation. One goal of transferring the 42 
-**      controller to a FSW app was to minimize changes to the exist 42 code.    
+**      not use dynamic memory allocation. One goal of transferring the 42
+**      controller to a FSW app was to minimize changes to the exist 42 code.
 **
 */
 void InitFSW(struct FSWType *FSW)
 {
- 
+
     long Ig,i,j;
-    
+
     /* Align components with s/c axes */
     double Awhl[3][3] = {{1.0,0.0,0.0},{0.0,1.0,0.0},{0.0,0.0,1.0}};
     double Amtb[3][3] = {{1.0,0.0,0.0},{0.0,1.0,0.0},{0.0,0.0,1.0}};
     double Mmax[3] = {300.0,300.0,300.0};      /* A-m^2  */
     double MOI[3] = {2759.831373, 2117.500000, 3835.272549};  /* kg-m^2 - moved to table */
-	
-   
+
+
     FSW->Init = 1;
 
     /* Gimbals */
@@ -85,7 +85,7 @@ void InitFSW(struct FSWType *FSW)
 	 /* dcm - Copied from 42init.c using SC_Aura.txt definitions*/
 	 A2C(312,0.0*D2R,0.0*D2R,0.0*D2R,FSW->Gim[0].CGiBi);
     A2C(312,0.0*D2R,0.0*D2R,0.0*D2R,FSW->Gim[0].CBoGo);
-    
+
 
     /* Wheels */
     FSW->Nwhl = 3;
@@ -98,7 +98,7 @@ void InitFSW(struct FSWType *FSW)
         for (j=0;j<3;j++) {
            FSW->Awhl[j][i] = Awhl[j][i];
         }
-        FSW->Hwcmd[i] = 0.0;  /* Commanded wheel momentum - No bias */	
+        FSW->Hwcmd[i] = 0.0;  /* Commanded wheel momentum - No bias */
     }
     if (FSW->Nwhl >= 3) PINVG(FSW->Awhl,FSW->AwhlPlus,3,FSW->Nwhl);
 
@@ -122,7 +122,7 @@ void InitFSW(struct FSWType *FSW)
     for (i=0;i<3;i++) {
         FSW->MOI[i] = MOI[i];
     }
-    OS_printf(">>>>>>InitFSW MOI: %lf %lf %lf\n",FSW->MOI[0],FSW->MOI[1],FSW->MOI[2]);
+    //OS_printf(">>>>>>InitFSW MOI: %lf %lf %lf\n",FSW->MOI[0],FSW->MOI[1],FSW->MOI[2]);
     FSW->mass = 1000.0;
 
     /* For RampCoastGlide.  See Inp_Cmd.txt for easy modification. */
@@ -174,7 +174,7 @@ void ThreeAxisFSW(struct FSWType *FSW)
             FindPDGains(FSW->MOI[i],FSW->wc[i],FSW->zc[i], &FSW->Kr[i],&FSW->Kp[i]);
         }
         FSW->Kunl = 1.0E6;
-        OS_printf(">>>>>>ThreeAxis Init MOI: %lf %lf %lf\n",FSW->MOI[0],FSW->MOI[1],FSW->MOI[2]);
+        //OS_printf(">>>>>>ThreeAxis Init MOI: %lf %lf %lf\n",FSW->MOI[0],FSW->MOI[1],FSW->MOI[2]);
     }
 
       /* Find Attitude Command */
@@ -192,7 +192,7 @@ void ThreeAxisFSW(struct FSWType *FSW)
          FSW->Twhlcmd[i] = -FSW->Tcmd[i];
       }
 
-      //OS_printf("Mom Mgmt: Hw: %.6e, %.6e, %.6e, Hwcmd: %.6e, %.6e, %.6e\n", 
+      //OS_printf("Mom Mgmt: Hw: %.6e, %.6e, %.6e, Hwcmd: %.6e, %.6e, %.6e\n",
       //          FSW->Hw[0], FSW->Hw[1], FSW->Hw[2], FSW->Hwcmd[0], FSW->Hwcmd[1], FSW->Hwcmd[2]);
       /* Momentum Management */
       for(i=0;i<3;i++) {
@@ -207,9 +207,9 @@ void ThreeAxisFSW(struct FSWType *FSW)
       /* Gimbals */
       FSW->GimCmd[0].Rate[0] = wln[1];
 
-	  //OS_printf("Before PointGimbalToTarget(): %ld, %.6e, %.6e\n", 
+	  //OS_printf("Before PointGimbalToTarget(): %ld, %.6e, %.6e\n",
 	  //          FSW->Gim[0].RotSeq, FSW->Gim[0].CGiBi[0][0], FSW->Gim[0].CBoGo[0][0]);
-	  
+
       if (FSW->SunValid) {
            PointGimbalToTarget(FSW->Gim[0].RotSeq, FSW->Gim[0].CGiBi,
                FSW->Gim[0].CBoGo, FSW->svb, Zvec,FSW->GimCmd[0].Ang);
@@ -221,7 +221,7 @@ void ThreeAxisFSW(struct FSWType *FSW)
          FSW->GimCmd[0].Ang[0] += TwoPi;
       if (FSW->Gim[0].Ang[0] - FSW->GimCmd[0].Ang[0] < -Pi)
          FSW->GimCmd[0].Ang[0] -= TwoPi;
-      
- 
+
+
 } /* End ThreeAxisFSW() */
 

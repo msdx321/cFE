@@ -20,6 +20,9 @@
 ** namespace _42 {
 ** #endif
 */
+#ifndef RTT_MEASURE
+#undef RTT_MEASURE
+#endif
 
 struct CmdVecType {
    long Mode;
@@ -164,7 +167,9 @@ struct FSWType {
 
    double Bold1,Bold2,xold,yold;
 
+#ifdef RTT_MEASURE
    unsigned long long sttime; /* for RTT measurement */
+#endif
 };
 
 /*

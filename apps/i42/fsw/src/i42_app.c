@@ -326,7 +326,11 @@ static boolean ProcessSensorData(void)
             &(I42App.SensorPkt.svb[0]), &(I42App.SensorPkt.svb[1]), &(I42App.SensorPkt.svb[2]),
             &(I42App.SensorPkt.bvb[0]), &(I42App.SensorPkt.bvb[1]), &(I42App.SensorPkt.bvb[2]),
             &(I42App.SensorPkt.Hw[0]),  &(I42App.SensorPkt.Hw[1]),  &(I42App.SensorPkt.Hw[2]),
+#ifdef RTT_MEASURE
             &(I42App.SensorPkt.SunValid), &(I42App.SensorPkt.time))) == 28) {
+#else
+            &(I42App.SensorPkt.SunValid))) == 27) {
+#endif
 
             //OS_printf("I42::ProcessSensorData(): Hw = [%.8e, %.8e, %.8e]\n",
 		      //          I42App.SensorPkt.Hw[0],I42App.SensorPkt.Hw[1],I42App.SensorPkt.Hw[2]);
@@ -348,7 +352,7 @@ static boolean ProcessSensorData(void)
       } /* End if fgets() */
       else {
 
-	     //OS_printf("I42::ProcessSensorData():sscanf() failed status = %d\n",Status);
+	     OS_printf("I42::ProcessSensorData():sscanf() failed status = %d\n",Status);
 
 		 I42App.NoSensorDisconnectCnt++;
 
@@ -409,7 +413,7 @@ rtt_measure(unsigned long long st_time)
 		}
 		OS_printf("----------------------------------\n");
 		/* reset and get a fresh set! */
-		test_iters = 0;
+		//test_iters = 0;
 	}
 }
 
@@ -476,7 +480,9 @@ static boolean ProcessActuatorData(void)
 //            ActuatorPkt->WhlTorqCmd[0], ActuatorPkt->WhlTorqCmd[1], ActuatorPkt->WhlTorqCmd[2],
 //            ActuatorPkt->MtbCmd[0], ActuatorPkt->MtbCmd[1], ActuatorPkt->MtbCmd[2],
 //            ActuatorPkt->SaGimbalCmd);
+#ifdef RTT_MEASURE
 		 rtt_measure(ActuatorPkt->time);
+#endif
 
 		 PktSent = SendActuatorPkt(I42App.OutBuf, strlen(I42App.OutBuf));
 

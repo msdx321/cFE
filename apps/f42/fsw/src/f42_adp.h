@@ -90,7 +90,9 @@ typedef struct
    double  Hw[3];
    int     SunValid;
 
+#ifdef RTT_MEASURE
    unsigned long long time;
+#endif
 } OS_PACK F42_ADP_SensorPkt;
 #define F42_ADP_SENSOR_PKT_LEN sizeof (F42_ADP_SensorPkt)
 
@@ -107,7 +109,9 @@ typedef struct
    double  MtbCmd[3];
    double  SaGimbalCmd;
 
+#ifdef RTT_MEASURE
    unsigned long long time;
+#endif
 } OS_PACK F42_ADP_ActuatorPkt;
 #define F42_ADP_ACTUATOR_PKT_LEN sizeof (F42_ADP_ActuatorPkt)
 
