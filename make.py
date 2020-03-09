@@ -193,22 +193,25 @@ print "Copied {} to {}".format(OBJECT_SOURCE, OBJECT_DESTINATION)
 
 print "=== Copying apps ==="
 for app in CFE_APPS:
-    dest = COMPOSITE_IMPL_NO_INTERFACE_DIR + app + "/cFE_"
-    sp.check_call("cp build/cpu1/osk_app_fw/*.o " + COMPOSITE_IMPL_NO_INTERFACE_DIR + app + "/",
+    try:
+        dest = COMPOSITE_IMPL_NO_INTERFACE_DIR + app + "/cFE_"
+        sp.check_call("cp build/cpu1/osk_app_fw/*.o " + COMPOSITE_IMPL_NO_INTERFACE_DIR + app + "/",
                   shell=True, cwd=CFE_DIR)
-    # Copying cfs lib object to each app.
-    shutil.copy('build/cpu1/cfs_lib/cfs_utils.o', dest + 'cfs_utils.o')
-    # Copying expat lib objects to each app.
-    shutil.copy('build/cpu1/expat_lib/expat_init.o', dest + 'expat_init.o')
-    shutil.copy('build/cpu1/expat_lib/xmlparse.o', dest + 'xmlparse.o')
-    shutil.copy('build/cpu1/expat_lib/xmlrole.o', dest + 'xmlrole.o')
-    shutil.copy('build/cpu1/expat_lib/xmltok.o', dest + 'xmltok.o')
-    shutil.copy('build/cpu1/expat_lib/xmltok_impl.o', dest + 'xmltok_impl.o')
-    shutil.copy('build/cpu1/expat_lib/xmltok_ns.o', dest + 'xmltok_ns.o')
-    for src in glob.glob(CFE_MAKE_ROOT + app + "/*.o"):
-        basename = os.path.basename(src)
-        print "Copying object '{}' to '{}'.".format(basename, dest + basename)
-        shutil.copy(src, dest + basename)
+        # Copying cfs lib object to each app.
+        shutil.copy('build/cpu1/cfs_lib/cfs_utils.o', dest + 'cfs_utils.o')
+        # Copying expat lib objects to each app.
+        shutil.copy('build/cpu1/expat_lib/expat_init.o', dest + 'expat_init.o')
+        shutil.copy('build/cpu1/expat_lib/xmlparse.o', dest + 'xmlparse.o')
+        shutil.copy('build/cpu1/expat_lib/xmlrole.o', dest + 'xmlrole.o')
+        shutil.copy('build/cpu1/expat_lib/xmltok.o', dest + 'xmltok.o')
+        shutil.copy('build/cpu1/expat_lib/xmltok_impl.o', dest + 'xmltok_impl.o')
+        shutil.copy('build/cpu1/expat_lib/xmltok_ns.o', dest + 'xmltok_ns.o')
+        for src in glob.glob(CFE_MAKE_ROOT + app + "/*.o"):
+            basename = os.path.basename(src)
+            print "Copying object '{}' to '{}'.".format(basename, dest + basename)
+            shutil.copy(src, dest + basename)
+    except:
+        pass # ignore err and keep going
 
 print "=== Integrating Tar Filesystem  ==="
 # This is a hack, but we need to include tables, and they aren't being included!
