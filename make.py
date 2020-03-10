@@ -219,6 +219,6 @@ sp.check_call("cp *.tbl cf" + OUT,
               shell=True, cwd=CFE_OBJECT_LOCATION)
 sp.check_call("tar cf cFE_fs.tar --exclude=\"cf/apps/composite_cFE.o\" cf/" + OUT,
               shell=True, cwd=CFE_OBJECT_LOCATION)
-sp.check_call("ld -r -b binary cFE_fs.tar -o cFE_fs.o" + OUT,
+sp.check_call("ld -m elf_i386 -r -b binary cFE_fs.tar -o cFE_fs.o" + OUT,
               shell=True, cwd=CFE_OBJECT_LOCATION)
 shutil.copy(CFE_OBJECT_LOCATION + "/cFE_fs.o", COMPOSITE_CFE_COMPONENT_ROOT)
