@@ -40,7 +40,7 @@
 
 # List of apps/libs to include in the build
 
-THE_APPS := bm cfs_lib cs ds expat_lib f42 fm hc hs i42 kit_to kit_ci kit_sch lc md mm osk_app_fw sc sim tftp
+THE_APPS := bm cfs_lib ci_lab to_lab cs ds expat_lib f42 fm hc hs i42 kit_to kit_ci kit_sch lc md mm osk_app_fw sc sim tftp
 
 export THE_APPS
 
